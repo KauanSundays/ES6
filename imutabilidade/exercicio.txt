@@ -1,0 +1,26 @@
+### Exercício Prático: Atualização Imutável de Perfil
+
+**Cenário:** Você recebeu o objeto abaixo que representa o perfil de um usuário em um sistema. 
+O usuário acabou de atualizar o endereço de entrega e adicionou uma nova habilidade ao seu perfil.
+
+```javascript
+const usuario = {
+  id: 101,
+  nome: "Kauan",
+  info: {
+    cidade: "São Paulo",
+    status: "Ativo"
+  },
+  habilidades: ["Python", "JavaScript"]
+};
+
+```
+
+**Seu Desafio:**
+Crie um novo objeto chamado `usuarioAtualizado` utilizando o **Spread Operator (`...`)** 
+para garantir a imutabilidade (o objeto `usuario` original **não** pode ser alterado).
+
+Nesse novo objeto, você deve:
+
+1. Alterar a `cidade` para `"Campinas"`.
+2. Adicionar a habilidade `"TypeScript"` ao final do array de `habilidades`.

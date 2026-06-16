@@ -1,6 +1,7 @@
 O exercício é Formatação de Catálogo.
 
-O objetivo é criar uma função formatarProdutos(produtos) que retorne um novo array contendo os mesmos produtos, mas com uma nova propriedade adicionada a cada um deles.
+O objetivo é criar uma função formatarProdutos(produtos) que retorne um novo array contendo os mesmos produtos, 
+mas com uma nova propriedade adicionada a cada um deles.
 As regras são:
 
 Transformação: Cada objeto deve ganhar uma nova propriedade chamada precoFormatado.
