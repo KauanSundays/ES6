@@ -9,4 +9,4 @@ function calcularTotal (precoItem: number, taxaEntrega: number): number {
     return totalApagar
 }
 
-console.log(calcularTotal(40, 5));
+console.log(calcularTotal(40, 10));
