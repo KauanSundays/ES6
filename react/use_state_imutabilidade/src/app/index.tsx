@@ -1,83 +1,74 @@
 import React, { useState } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 
-export default function GerenciadorTime() {
-  // Estado 1: Objeto do Time
-  const [statusTime, setStatusTime] = useState({
-    nome: "Real Madrid",
-    vitorias: 10,
-    derrotas: 2
+export default function CarrinhoIngressos() {
+  const [resumo, setResumo] = useState({
+    torcedor: "seu nome",
+    totalIngressos: 0
   });
 
-  // Estado 2: Array de Titulares
-  const [titulares, setTitulares] = useState([
-    { id: '1', nome: 'Vinicius Jr', posicao: 'Atacante' },
-    { id: '2', nome: 'Jude Bellingham', posicao: 'Meio-Campo' },
-    { id: '3', nome: 'Rodrygo', posicao: 'Atacante' }
+  const [ingressos, setIngresso] = useState([
+    { id: '1', jogo: 'Eagles vs Cowboys', preco: 150, confirmado: false },
+    { id: '2', jogo: 'Eagles vs Cowboys', preco: 250, confirmado: false }
   ]);
 
-  // REQUISITO 1: Atualize o statusTime adicionando +1 vitória sem mutar o objeto antigo.
-  const handleAdicionarVitoria = () => {
-    setStatusTime(prevStatusTime => ({
-      ...prevStatusTime,
-      vitorias: prevStatusTime.vitorias + 1
-    }))
-  };
-
-  // REQUISITO 2: Adicione um novo jogador ({ id: '4', nome: 'Endrick', posicao: 'Atacante' }) 
-  // ao array de titulares sem mutar o array antigo.
-  const handleContratarEndrick = () => {
-    setTitulares(prevTitulares => [
-      ...prevTitulares,
+  const adicionarIngresso = () => {
+    setIngresso(ingressos => ([
+      ...ingressos,
       {
         id: Date.now().toString(),
-        nome: "Endrick",
-        posicao: "Atacante"
+        jogo: "Lakers vs Celtics",
+        preco: 200,
+        confirmado: false
       }
-    ]
-    );
-  };
+    ]))
+  }
+  
+  const removerIngresso = (id: string) => {
+    setIngresso(ingressos.filter(item => item.id !== id))
+  } 
 
-  // REQUISITO 3: Atualize a posição do jogador de id '1' (Vinicius Jr) para 'Ponta Esquerda',
-  // utilizando o método .map() e o operador spread para manter imutável.
-  const handleMudarPosicaoVini = () => {
-    setTitulares(prevTitulares => 
-      prevTitulares.map(item => {
-        if (item.id === "1") {
-          return {...item, posicao: "Ponta Esquerda"};
+  const alternarConfirmacao = (id: string) => {
+    console.log(id)
+    setIngresso(setIngressos => 
+      setIngressos.map(item => {
+        if (item.id === id) {
+          return { ...item, confirmado: !item.confirmado };
         } else {
           return item;
         }
       })
     )
-  };
+  }
+
+  const atualizarTorcedor = () => {
+    setResumo(resumoAnterior => ({
+      ...resumoAnterior,
+      torcedor: "Ricardo"
+    })
+    )
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{statusTime.nome}</Text>
-      <Text style={styles.subtitle}>
-        Vitórias: {statusTime.vitorias} | Derrotas: {statusTime.derrotas}
-      </Text>
+      <Text>Nome do torcedor: {resumo.torcedor}</Text>
+      <Text>Numero total de ingressos: {resumo.totalIngressos}</Text>
 
-      <Button title="Registrar Vitória" onPress={handleAdicionarVitoria} />
-
-      <Text style={styles.sectionHeader}>Elenco Titular:</Text>
-      <FlatList
-        data={titulares}
+      <View>
+        <FlatList
+        data={ingressos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Text style={styles.playerText}>
-            {item.nome} - <Text style={styles.posText}>{item.posicao}</Text>
+            {item.jogo} - <Text style={styles.posText}>{item.confirmado === true ? "Confirmado" : "Pendente" } - Valor: {item.preco}</Text>
+            <Button title='Alterar Status' onPress={() => alternarConfirmacao(item.id)}></Button>
           </Text>
         )}
-      />
-
-      <View style={styles.buttonGroup}>
-        <Button title="Contratar Endrick" onPress={handleContratarEndrick} />
-        <Button title="Mudar Posição do Vini Jr" onPress={handleMudarPosicaoVini} color="#841584" />
+        />
       </View>
+      <Button title='Atualizar nome' onPress={atualizarTorcedor}></Button>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
