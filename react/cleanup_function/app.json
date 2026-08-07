@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cleanupFunction",
-    "slug": "cleanupFunction",
+    "name": "cleanup_function",
+    "slug": "cleanup_function",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
