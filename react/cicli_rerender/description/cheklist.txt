@@ -2,10 +2,10 @@
 
 ### Etapa 1: Tipagem e Contratos (`types.ts`)
 
-* [ ] `interface Player` contendo: `id` (string), `name` (string), `position` (string), `price` (number) e `isDrafted?: boolean`.
-* [ ] Interface Genérica `ApiResponse<T>` contendo: `data: T`, `status: number`, `message?: string`.
-* [ ] Interface/Type `ApiError` contendo: `message: string`.
-* [ ] Type Guard `isApiError(error: unknown): error is ApiError` utilizando os operadores `in` e `typeof`.
+* [ x ] `interface Player` contendo: `id` (string), `name` (string), `position` (string), `price` (number) e `isDrafted?: boolean`.
+* [ x ] Interface Genérica `ApiResponse<T>` contendo: `data: T`, `status: number`, `message?: string`.
+* [ x ] Interface/Type `ApiError` contendo: `message: string`.
+* [ x ] Type Guard `isApiError(error: unknown): error is ApiError` utilizando os operadores `in` e `typeof`.
 
 ---
 
