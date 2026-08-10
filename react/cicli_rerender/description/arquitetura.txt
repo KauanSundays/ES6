@@ -1,0 +1,70 @@
+A arquitetura recomendada para o **Fantasy Draft App** utiliza uma organização **por Camadas (Layer-Based)** dentro de uma pasta raiz `src/`. Essa estrutura separa a lógica de negócios, o layout visual e os contratos de tipo de forma isolada e testável.
+
+```text
+fantasy-draft-app/
+├── App.tsx                    # Ponto de entrada (Renderiza a tela principal)
+└── src/
+    ├── @types/                # O Regulamento da Liga (Interfaces, Generics, Type Guards)
+    │   └── index.ts
+    │
+    ├── constants/             # O Banco de Dados dos Olheiros (Mocks de jogadores)
+    │   └── mockPlayers.ts
+    │
+    ├── hooks/                 # O Diretor de Futebol (Regra de negócio e fetch assíncrono)
+    │   └── usePlayers.ts
+    │
+    ├── components/            # Os Uniformes/Peças Visuais (Componentes reaproveitáveis e "burros")
+    │   └── PlayerCard.tsx
+    │
+    └── screens/               # O Estádio/Campo de Jogo (Telas que integram os hooks com a UI)
+        └── Home/
+            ├── index.tsx
+            └── styles.ts
+
+```
+
+---
+
+## Papel de Cada Pasta no App
+
+### 1. `src/@types/` (Regulamento)
+
+* **O que fica aqui:** Apenas definições do TypeScript (`interface`, `type`, `Generics`, `Type Guards`).
+* **Por que separar:** Se o backend mudar a estrutura do jogador, você altera apenas este contrato e o TypeScript apontará automaticamente onde o app precisa de ajustes.
+* **Analogia:** É o livro de regras da FIFA. Ninguém joga sem ele.
+
+### 2. `src/constants/` (Dados do Mercado)
+
+* **O que fica aqui:** Dados estáticos e configurações que não mudam em tempo de execução, como o array `PLAYERS_DATA` inicial.
+* **Por que separar:** Evita poluir o Hook com arrays gigantes de objetos fixos.
+
+### 3. `src/hooks/` (Diretoria de Futebol)
+
+* **O que fica aqui:** Toda a lógica assíncrona, controle de `loading`, tratamentos de erro com `try/catch` e gerenciamento dos estados brutos.
+* **Por que separar:** A tela (`HomeScreen`) não precisa saber como a API funciona ou como o `setTimeout` é executado. A tela apenas solicita os dados e o hook os entrega prontos.
+
+### 4. `src/components/` (Peças da Interface)
+
+* **O que fica aqui:** Componentes "burros" (Presentational Components) como o `PlayerCard`. Eles não buscam dados sozinhos; apenas recebem `props` e exibem elementos em tela.
+* **Por que separar:** Permite aplicar o `React.memo` isoladamente sem interferências de estados externos da tela.
+
+### 5. `src/screens/` (O Campo de Jogo)
+
+* **O que fica aqui:** A junção de tudo. A tela consome o hook `usePlayers`, executa os cálculos de performance (`useMemo`, `useCallback`) e passa os dados para a `FlatList` e para os `PlayerCard`.
+
+---
+
+## O Fluxo dos Dados no App
+
+```text
+[constants/mockPlayers] ──> [hooks/usePlayers] ──> [screens/Home] ──> [components/PlayerCard]
+                                 ▲                      │
+                                 │                      ▼
+                        [types (Regulamento)] ◄─ [Calculos c/ useMemo]
+
+```
+
+1. **Os Dados Nascem:** O `usePlayers` pega os dados do `mockPlayers`.
+2. **Validação:** Todos os passos são validados pelos contratos definidos em `types`.
+3. **A Tela Processa:** A `HomeScreen` recebe os dados do hook, faz a filtragem de busca e a soma da folha salarial com `useMemo`.
+4. **Exibição:** A `HomeScreen` entrega cada jogador individualmente para o `PlayerCard` através da `FlatList`.

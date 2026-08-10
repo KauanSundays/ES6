@@ -1,0 +1,24 @@
+### Funcionalidades Básicas do App
+
+**1. Painel do GM (Métricas do Time)**
+
+* **Contador de Atletas:** Exibe o número total de jogadores contratados no momento.
+* **Folha Salarial em Tempo Real:** Calcula e exibe a soma total dos valores de contrato dos jogadores escalados.
+
+**2. Busca e Filtro Dinâmico**
+
+* **Filtro por Nome:** Campo de texto (`TextInput`) que filtra a vitrine de jogadores em tempo real conforme você digita.
+
+**3. Vitrine de Atletas (Lista)**
+
+* **Card do Jogador:** Exibe as informações individuais do atleta (nome, posição e preço do contrato).
+* **Indicador de Carregamento:** Tela de *Loading* enquanto o app simula a busca de dados na API.
+
+**4. Gestão de Contratos (Draft)**
+
+* **Contratar / Dispensar:** Botão de ação rápida no card que adiciona o atleta ao "Meu Time" ou o remove do elenco.
+* **Status Visual:** Muta a aparência e o texto do botão de acordo com o estado do contrato (ex: botão verde para "Contratar", botão vermelho/cinza para "Dispensar").
+
+**5. Feedback de Erro**
+
+* **Alerta de Falha:** Exibição de mensagem amigável na interface caso a chamada assíncrona de dados falhe.
