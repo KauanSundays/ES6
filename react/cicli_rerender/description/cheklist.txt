@@ -11,7 +11,7 @@
 
 ### Etapa 2: Camada de Dados & Custom Hook (`usePlayers.ts`)
 
-* [ ] Mock de dados com pelo menos 6 a 8 jogadores tipados como `Player[]`.
+* [ x ] Mock de dados com pelo menos 6 a 8 jogadores tipados como `Player[]`.
 * [ ] Estados do Hook: `players` (`Player[]`), `loading` (`boolean`), `error` (`string | null`).
 * [ ] `useEffect` simulando chamada HTTP com `Promise` + `setTimeout` (1.5 segundos).
 * [ ] Bloco `try/catch/finally` utilizando o Type Guard `isApiError` para capturar exceções.
