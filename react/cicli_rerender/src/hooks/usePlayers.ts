@@ -8,3 +8,17 @@ export const usePlayers = () => {
     const error = useState<string | null>(null)
 }
 
+
+useEffect(() => {
+    const timer = setTimeout(() => {
+        try {
+            
+        } catch (err) {
+
+        } finally {
+
+        }
+    }, 1500);
+
+    return () => clearTimeout(timer)
+})
