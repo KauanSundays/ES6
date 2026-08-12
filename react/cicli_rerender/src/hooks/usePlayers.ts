@@ -23,7 +23,7 @@ export const usePlayers = () => {
             } finally {
                 setLoading(false)
             }
-        }, 1500);
+        }, 5500);
 
         return () => clearTimeout(timer)
     }, []);

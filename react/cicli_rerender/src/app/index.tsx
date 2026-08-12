@@ -1,13 +1,13 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View, Text, ActivityIndicator, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { AnimatedIcon } from '@/components/animated-icon';
 import { HintRow } from '@/components/hint-row';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { ThemedView , } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { usePlayers } from '@/hooks/usePlayers';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -29,35 +29,37 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
+  const { players, loading, error } = usePlayers();
+  if ( loading === true ) {
+    return (
+      <View>
+        <ActivityIndicator size="large"></ActivityIndicator>
+        <Text>Buscando jogadores</Text>
+      </View>
+    )
+  }
+
+  if (error) {
+    return (
+      <View>
+        <Text>{error}</Text>
+      </View>
+    )
+  }
+
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+    <SafeAreaView style={styles.safeArea}>
+      <FlatList
+      data={players}
+      keyExtractor={item => String(item.id)}
+      renderItem={({ item }) => (
+        <View>
+          <Text>{item.name} - {item.position}</Text>
+          <Text>{item.price}</Text>
+        </View>
+      )
+      }/>   
+    </SafeAreaView>
   );
 }
 
