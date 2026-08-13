@@ -5,13 +5,6 @@ export interface Player {
     price: number,
     isDrafted: boolean
 }
-
-interface PlayerCardProps {
-  player: Player
-  isDrafted: boolean
-  onToggleDraft: string
-}
-
 interface ApiResponse<T> {
   success: boolean;
   message: string;
