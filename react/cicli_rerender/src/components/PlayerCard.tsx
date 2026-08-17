@@ -9,6 +9,8 @@ interface PlayerCardProps {
 }
 
 export const PlayerCard = memo(({ player, isDrafted, onToggleDraft } : PlayerCardProps) =>  {
+    console.log(player.name);
+    
     return (
         <View>
             <Text>{player.name}</Text>

@@ -8,6 +8,7 @@ import { ThemedView , } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { usePlayers } from '@/hooks/usePlayers';
+import { PlayerCard } from '@/components/PlayerCard';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -53,13 +54,15 @@ export default function HomeScreen() {
       data={players}
       keyExtractor={item => String(item.id)}
       renderItem={({ item }) => (
-        <View>
-          <Text>{item.name} - {item.position}</Text>
-          <Text>{item.price}</Text>
-        </View>
+        <PlayerCard
+        player={item}
+        isDrafted={false}
+        onToggleDraft={(id => console.log("clicou no id: ", id))}
+        />
       )
-      }/>   
+      }/> 
     </SafeAreaView>
+    // <PlayerCard/>
   );
 }
 
