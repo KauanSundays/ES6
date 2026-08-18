@@ -53,6 +53,7 @@ export default function HomeScreen() {
       <FlatList
       data={players}
       keyExtractor={item => String(item.id)}
+      numColumns={2}
       renderItem={({ item }) => (
         <PlayerCard
         player={item}
