@@ -9,6 +9,7 @@ import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { usePlayers } from '@/hooks/usePlayers';
 import { PlayerCard } from '@/components/PlayerCard';
+import { useCallback } from 'react';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -48,12 +49,17 @@ export default function HomeScreen() {
     )
   }
 
+  const handleToggleDraft = useCallback((id: number) => {
+    console.log("Clicou no jogador ID:", id);
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <FlatList
       data={players}
       keyExtractor={item => String(item.id)}
       numColumns={2}
+      columnWrapperStyle={{ justifyContent: 'space-between', gap: 12 }}
       renderItem={({ item }) => (
         <PlayerCard
         player={item}

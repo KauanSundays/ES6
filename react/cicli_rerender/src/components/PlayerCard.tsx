@@ -1,12 +1,14 @@
 import { Player } from "@/types";
 import { View, Text, TouchableOpacity} from "react-native";
-import { memo } from "react";
+import { memo, useState } from "react";
 
 interface PlayerCardProps {
   player: Player
   isDrafted: boolean
   onToggleDraft: (id: number) => void // aqui eu indico que isso é uma função
 }
+
+const [draftedIds, setDraftedIds] = useState<number[]>([]);
 
 export const PlayerCard = memo(({ player, isDrafted, onToggleDraft } : PlayerCardProps) =>  {
     console.log(player.name);
