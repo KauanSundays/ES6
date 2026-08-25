@@ -52,7 +52,15 @@ export default function HomeScreen() {
   }
 
   const handleToggleDraft = useCallback((id: number) => {
-    
+    setDraftedIds((prevIds) => {
+      const jaDraftado = prevIds.includes(id);
+
+      if (jaDraftado) {
+        return prevIds.filter((draftedId) => draftedId !== id)
+      }
+
+      return [...prevIds, id]
+    })
   }, []);
 
   return (
@@ -65,8 +73,8 @@ export default function HomeScreen() {
       renderItem={({ item }) => (
         <PlayerCard
         player={item}
-        isDrafted={false}
-        handleToggleDraft={(id)}
+        isDrafted={draftedIds.includes(item.id)}
+        handleToggleDraft={handleToggleDraft}
         />
       )
       }/> 
