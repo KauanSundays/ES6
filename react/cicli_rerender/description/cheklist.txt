@@ -23,8 +23,8 @@
 
 * [ x ] Interface `PlayerCardProps` tipando as props: `player` (`Player`), `isDrafted` (`boolean`), `onToggleDraft` (`(id: string) => void`).
 * [ x ] Inclusão de `console.log(`[RENDER] PlayerCard: ${player.name}`)` no topo do componente para monitorar re-renders.
-* [ ] Layout do Card: Nome do jogador, posição, valor do contrato e botão dinâmico ("Contratar" / "Dispensar").
-* [ ] Export do componente envelopado com `React.memo`.
+* [ x ] Layout do Card: Nome do jogador, posição, valor do contrato e botão dinâmico ("Contratar" / "Dispensar").
+* [ x ] Export do componente envelopado com `React.memo`.
 
 ---
 
