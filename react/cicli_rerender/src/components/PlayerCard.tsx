@@ -5,16 +5,14 @@ import { memo, useState } from "react";
 interface PlayerCardProps {
   player: Player
   isDrafted: boolean
-  onToggleDraft: (id: number) => void // aqui eu indico que isso é uma função
+  handleToggleDraft: (id: number) => void // aqui eu indico que isso é uma função
 }
 
-const [draftedIds, setDraftedIds] = useState<number[]>([]);
-
-export const PlayerCard = memo(({ player, isDrafted, onToggleDraft } : PlayerCardProps) =>  {
+export const PlayerCard = memo(({ player, isDrafted, handleToggleDraft } : PlayerCardProps) =>  {
     console.log(player.name);
 
     const handleToggle = () => {
-        onToggleDraft(player.id);
+        handleToggleDraft(player.id);
     };
     
     return (

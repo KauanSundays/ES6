@@ -9,7 +9,7 @@ import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { usePlayers } from '@/hooks/usePlayers';
 import { PlayerCard } from '@/components/PlayerCard';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -30,7 +30,9 @@ function getDevMenuHint() {
   );
 }
 
+
 export default function HomeScreen() {
+  const [draftedIds, setDraftedIds] = useState<number[]>([]);
   const { players, loading, error } = usePlayers();
   if ( loading === true ) {
     return (
@@ -50,7 +52,7 @@ export default function HomeScreen() {
   }
 
   const handleToggleDraft = useCallback((id: number) => {
-    console.log("Clicou no jogador ID:", id);
+    
   }, []);
 
   return (
@@ -64,7 +66,7 @@ export default function HomeScreen() {
         <PlayerCard
         player={item}
         isDrafted={false}
-        onToggleDraft={(id => console.log("clicou no id: ", id))}
+        handleToggleDraft={(id)}
         />
       )
       }/> 
