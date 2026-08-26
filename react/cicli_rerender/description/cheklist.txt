@@ -30,8 +30,8 @@
 
 ### Etapa 4: Tela Principal & Performance (`App.tsx`)
 
-* [ ] Consumo do Custom Hook: `const { players, loading, error } = usePlayers()`.
-* [ ] Estado local `search` (string) conectado ao `TextInput`.
+* [ x ] Consumo do Custom Hook: `const { players, loading, error } = usePlayers()`.
+* [ x ] Estado local `search` (string) conectado ao `TextInput`.
 * [ ] Estado local `myTeam` (`string[]`) guardando os IDs dos jogadores contratados.
 * [ ] `useMemo` para `filteredPlayers`: filtrando a lista por nome com `.filter()`.
 * [ ] `useMemo` para `totalCost`: calculando o custo total do time atual com `.reduce()`.

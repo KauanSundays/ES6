@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet, View, Text, ActivityIndicator, FlatList } from 'react-native';
+import { Platform, StyleSheet, View, Text, ActivityIndicator, FlatList, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AnimatedIcon } from '@/components/animated-icon';
 import { HintRow } from '@/components/hint-row';
@@ -34,6 +34,8 @@ function getDevMenuHint() {
 export default function HomeScreen() {
   const [draftedIds, setDraftedIds] = useState<number[]>([]);
   const { players, loading, error } = usePlayers();
+  const [ search, setSearch] = useState('');
+
   if ( loading === true ) {
     return (
       <View>
@@ -65,6 +67,9 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <TextInput value={search} onChangeText={setSearch} placeholder="Pesquisar jogador...">
+
+      </TextInput>
       <FlatList
       data={players}
       keyExtractor={item => String(item.id)}
@@ -79,7 +84,6 @@ export default function HomeScreen() {
       )
       }/> 
     </SafeAreaView>
-    // <PlayerCard/>
   );
 }
 
@@ -92,10 +96,12 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     paddingHorizontal: Spacing.four,
-    alignItems: 'center',
+    alignSelf: 'center',
+    width: "100%",
     gap: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
+    marginTop: 70
   },
   heroSection: {
     alignItems: 'center',
