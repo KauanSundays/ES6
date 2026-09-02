@@ -83,6 +83,7 @@ export default function HomeScreen() {
         />
       )
       }/> 
+      <Text>IDS do meu time: {draftedIds.join(', ')}</Text>
     </SafeAreaView>
   );
 }
